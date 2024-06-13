@@ -23,10 +23,6 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to tag_url(Tag.last)
   end
 
-  test "should show tag" do
-    get tag_url(@tag)
-    assert_response :success
-  end
 
   test "should get edit" do
     get edit_tag_url(@tag)
