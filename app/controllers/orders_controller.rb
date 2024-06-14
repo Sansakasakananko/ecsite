@@ -1,43 +1,31 @@
 class OrdersController < ApplicationController
   def new
-    # @book=Book.new
-    # @book = Book.find(params[:id])
+    @order = Order.new
     @book = Book.find(params[:book_id])
-    # @order = Order.new
   end
 
 
-  def create
-    @order = Order.new
-    @book = Book.new(book_params)
+  def confirm
+    @order = Order.new(order_params)
+    @book = Book.find(order_params[:book_id])
+  end
 
-    if params[:back].present?
-      render :new
+  def create
+    @order = Order.new(order_params)
+    if @order.save
+      redirect_to complete_orders_path
     else
-      if @book.save
-        redirect_to complete_path, notice: "登録が完了しました。"
-      else
-        render :new
-      end 
+      render "confirm"
     end
   end
 
-  def confirm
-    @order =Order.new(order_params)
-    @book= Book.find(@order.book_id)
-  end
-  
   def complete
   end
 
-
   private
-    def order_params
-      params.require(:order).permit(:amount, :address, :address_number, :name, :book_id)
-    end
 
-
+  def order_params
+    params.require(:order).permit(:count, :adress, :adress_number, :book_id)
+  end  
 
 end
-
-

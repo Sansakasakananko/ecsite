@@ -9,9 +9,8 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :orders, only: [:new, :create] do
     collection do
-      get :cinfirm
+      get :confirm
       get :complete
     end
   end
-  
 end
