@@ -1,2 +1,30 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<h1>注文画面</h1>
+
+  <h2>注文商品</h2>
+  <p><strong>Title</strong>:  <%= @book.title %></p>
+  <p><strong>Author</strong>: <%= @book.author %></p>
+  <p><strong>Price</strong>:  <%= @book.price %></p>
+  
+  <h2>購入フォーム</h2>
+
+<%= form_with(model: @order, url:orders_path, local: true) do |form| %>
+  <div>
+    <%= form.label :adress_number, style: "display: block" %>
+    <%= form.text_field :adress_number %>
+  </div>
+
+  <div>
+    <%= form.label :adress, style: "display: block" %>
+    <%= form.text_field :adress %>
+  </div>
+
+  <div>
+    <%= form.label :amount, style: "display: block" %>
+    <%= form.select :amount, *[1..10] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
