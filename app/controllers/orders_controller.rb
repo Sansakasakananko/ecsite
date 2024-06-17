@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
     @book = Book.find(order_params[:book_id])
+
   end
 
   def create
@@ -25,7 +26,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:count, :adress, :adress_number, :book_id)
+    params.require(:order).permit(:count, :adress, :book_id)
   end  
 
 end

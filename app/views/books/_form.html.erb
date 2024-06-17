@@ -12,28 +12,32 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
+    <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
 
   <div>
-    <%= form.label :author, style: "display: block" %>
+    <%= form.label :author %>
     <%= form.text_field :author %>
   </div>
 
   <div>
-    <%= form.label :published_on, style: "display: block" %>
+    <%= form.label :published_on %>
     <%= form.date_field :published_on %>
   </div>
 
   <div>
-    <%= form.label :showing, style: "display: block" %>
+    <%= form.label :showing %>
     <%= form.check_box :showing %>
   </div>
 
   <div>
-    <%= form.label :price, style: "display: block" %>
+    <%= form.label :price %>
     <%= form.number_field :price %>
+  </div>
+
+  <div class="fields">
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
   </div>
 
   <div>

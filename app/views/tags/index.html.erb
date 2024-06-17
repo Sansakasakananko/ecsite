@@ -1,15 +1,40 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Tags</h1>
-
+ 
 <div id="tags">
   <% @tags.each do |tag| %>
     <%= render tag %>
-    <p>
-      <%= link_to "編集", edit_tag_path(tag) %> |
-      <%= link_to "削除", tag, data: {turbo_method: :delete} %>
-    </p>
+      <p>
+        <%= link_to "編集", edit_tag_path(tag) %>
+        <%= link_to "削除", tag, data: {turbo_method: :delete} %>
+      </p>
   <% end %>
 </div>
 
-<%= link_to "New tag", new_tag_path %>
+<%= form_with(model: Tag.new) do |form| %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+  <% if form.object.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(form.object.errors.count, "error") %> prohibited this tag from being saved:</h2>
+      <ul>
+        <% form.object.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>
+
+
+<%= link_to "入力画面に戻る", new_book_path %>

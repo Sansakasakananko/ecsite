@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'orders/index'
-  get 'orders/new'
-  get 'orders/create'
   devise_for :users
   get :mypage, to: 'mypage#index'
   resources :tags, except: :show

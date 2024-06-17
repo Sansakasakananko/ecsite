@@ -6,6 +6,10 @@
   <% @books.each do |book| %>
     <%= render book %>
     <p>
+      <strong>Tags:</strong>
+      <%= book.tags.map(&:name).join(", ") %>
+    </p>
+    <p>
       <%= link_to "Show this book", book %>
     </p>
   <% end %>
