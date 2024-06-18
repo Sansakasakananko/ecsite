@@ -1,3 +1,10 @@
+<header>
+  <%= render 'shared/user_signed_in' %>
+</header>
+
+<%= yield %>
+
+
 <h1>注文完了</h1>
 <p>注文が完了しました。ありがとうございました。</p>
-<%= link_to 'Back to Products', products_path %>
+<%= link_to '商品一覧画面へ', products_path %>

@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+  <p><%= link_to current_user.email, mypage_path %>さん、ようこそ</p>
+<% else %>
+  <p>ゲストさん</p>
+<% end %>

@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   end
 
   def complete
+    CompleteMailer.complete_mail(current_user).deliver
   end
 
   private

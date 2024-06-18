@@ -1,4 +1,12 @@
+<header>
+  <%= render 'shared/user_signed_in' %>
+</header>
+
 <p ide=notice><%= notice%></p>
+
+
+<%= yield %>
+
 
 <h1>商品一覧画面</h1>
 
@@ -10,6 +18,7 @@
       <th>Published on</th>
       <th>Showing</th>
       <th>Price</th>
+      <th>Show</th>
     </tr>
   </thead>
 
@@ -19,9 +28,9 @@
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.published_on %></td>
-        <td><%= book.showing %><td>
-        <td><%= book.price %><td>
-        <td><%= link_to 'Show', product_path(book) %></td>
+        <td><%= book.showing %></td>
+        <td><%= book.price %></td>
+        <td><%= link_to '詳細・購入', product_path(book) %></td>
       </tr>
     <% end %>
   </tbody>
