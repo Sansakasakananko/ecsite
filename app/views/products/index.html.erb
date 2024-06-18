@@ -13,6 +13,7 @@
 <table>
   <thead>
     <tr>
+      <th>Picture</th>
       <th>Title</th>
       <th>Author</th>
       <th>Published on</th>
@@ -24,7 +25,13 @@
 
   <tbody>
     <% @book.each do |book| %>
-      <tr>
+        <td>
+          <% if book.photo.attached? %>
+            <%= image_tag book.picture %>
+          <% else %>
+            画像がありません
+          <% end %>
+        </td>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.published_on %></td>

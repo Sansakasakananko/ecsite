@@ -6,6 +6,13 @@
   <% @books.each do |book| %>
     <%= render book %>
     <p>
+      <% if book.photo.attached? %>
+        <%= image_tag book.picture %>
+      <% else %>
+        画像がありません
+      <% end %>
+    </p>
+    <p>
       <strong>Tags:</strong>
       <%= book.tags.map(&:name).join(", ") %>
     </p>

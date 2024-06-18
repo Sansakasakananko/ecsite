@@ -7,6 +7,14 @@
 
 
 <h1>詳細画面</h1>
+  <p><strong>Picture</strong></p>:  
+          <% if @book.photo.attached? %>
+            <%= image_tag @book.picture %>
+          <% else %>
+            画像がありません
+          <% end %>
+        
+
 
   <p><strong>Tag</strong>:  <%= @book.tags.map(&:name).join(',') %></p>
   <p><strong>Title</strong>:  <%= @book.title %></p>
