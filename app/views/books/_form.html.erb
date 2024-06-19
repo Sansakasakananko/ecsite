@@ -52,6 +52,12 @@
 
     <%= form.radio_button :status, :sold_out%>
     <%= form.label :status, "売切れ" %>
+
+    <%= form.radio_button :status, :reserve%>
+    <%= form.label :status, "予約" %>
+
+    <%= form.radio_button :status, :backordered%>
+    <%= form.label :status, "入荷待ち" %>
   </div>
 
 

@@ -1,0 +1,8 @@
+ja:
+  enums:
+    book:
+    book/status:
+        saling: 販売中
+        sold_out: 売切れ
+        reserve: 予約
+        outordered: 入荷待ち
