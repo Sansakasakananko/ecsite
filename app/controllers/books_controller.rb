@@ -40,7 +40,12 @@ class BooksController < ApplicationController
       if @book.update(book_params)
         format.html { redirect_to book_url(@book), notice: "Book was successfully updated." }
         format.json { render :show, status: :ok, location: @book }
-      else
+          if @book.status == "saling"
+            @book.saling!
+          elsif @book.status == "sold_out"
+            @book.sold_out!
+        end
+      else  
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
@@ -65,6 +70,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author, :published_on, :showing, :price, :photo, tag_ids: [])
+      params.require(:book).permit(:title, :author, :published_on, :showing, :price, :photo, :status, tag_ids: [])
     end
   end

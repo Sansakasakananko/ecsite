@@ -46,6 +46,16 @@
   </div>
 
   <div>
+    Status:
+    <%= form.radio_button :status, :saling%>
+    <%= form.label :status, "販売中" %>
+
+    <%= form.radio_button :status, :sold_out%>
+    <%= form.label :status, "売切れ" %>
+  </div>
+
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

@@ -7,7 +7,7 @@
 
 
 <h1>詳細画面</h1>
-  <p><strong>Picture</strong></p>:  
+  <p><strong>Picture</strong></p> 
           <% if @book.photo.attached? %>
             <%= image_tag @book.picture %>
           <% else %>
@@ -22,6 +22,6 @@
   <p><strong>Published on</strong>: <%= @book.published_on %></p>
   <p><strong>Showing</strong>:  <%= @book.showing %></p>
   <p><strong>Price</strong>:  <%= @book.price %></p>
-
+  <p><strong>Status</strong>: <%= @book.status %></p>
  <%= link_to "購入", new_order_path(book_id: @book.id)%>
  <%= link_to "戻る", products_path%>

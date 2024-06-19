@@ -1,5 +1,10 @@
 <div id="<%= dom_id book %>">
   <p>
+    <strong>Tags:</strong>
+    <%= book.tags.map(&:name).join(", ") %>
+  </p>
+
+  <p>
     <strong>Title:</strong>
     <%= book.title %>
   </p>
@@ -24,6 +29,10 @@
     <%= book.price %>
   </p>
 
+  <p>
+    <strong>Status:<strong>
+      <%= book.status %>
+  </p>
 
 
 

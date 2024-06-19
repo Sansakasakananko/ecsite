@@ -13,6 +13,7 @@
 <table border="1">
   <thead>
     <tr>
+      <th>Stauts</th>
       <th>Picture</th>
       <th>Title</th>
       <th>Author</th>
@@ -25,6 +26,7 @@
 
   <tbody>
     <% @book.each do |book| %>
+        <td><%= book.status %></td>
         <td>
           <% if book.photo.attached? %>
             <%= image_tag book.picture %>
