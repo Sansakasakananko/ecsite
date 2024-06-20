@@ -1,7 +1,13 @@
 <header>
-  <%= render 'shared/user_signed_in' %>
-</header>
+    <%= render 'shared/user_signed_in' %>
 
+    <div style="text-align: right;">
+    <% if session[:cart_id]%>
+    <%= link_to 'カートを見る',cart_path(session[:cart_id]) %>
+    <% end %>
+  </div>
+
+</header>
 <%= yield %>
 
 

@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
       if @order.save
         @book = Book.find(order_params[:book_id])
         @book.sold_out! 
-        redirect_to complete_orders_path
+        redirect_to complete_orders_path, notice: 'Order was sussessfully created.'
       else
         render "confirm"
       end

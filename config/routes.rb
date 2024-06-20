@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :line_items ,only: :create
+  resources :carts, only: [:show, :destroy]
   devise_for :users
   get :mypage, to: 'mypage#index'
   resources :tags, except: :show

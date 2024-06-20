@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
   before_action :move_to_signed_in
   def index
-    @book = Book.all
+    @books = Book.all
+    @cart = current_cart
   end
 
   def show

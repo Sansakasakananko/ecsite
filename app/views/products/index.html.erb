@@ -1,30 +1,37 @@
 <header>
-  <%= render 'shared/user_signed_in' %>
+    <%= render 'shared/user_signed_in' %>
+
+    <div style="text-align: right;">
+    <% if session[:cart_id]%>
+    <%= link_to 'カートを見る',cart_path(session[:cart_id]) %>
+    <% end %>
+  </div>
+
 </header>
 
-<p ids=notice><%= notice%></p>
-
+<p id="notice"><%= notice %></p>
 
 <%= yield %>
-
 
 <h1>商品一覧画面</h1>
 
 <table border="1">
   <thead>
     <tr>
-      <th>Stauts</th>
+      <th>Status</th>
       <th>Picture</th>
       <th>Title</th>
       <th>Author</th>
       <th>Published on</th>
       <th>Price</th>
       <th>Show</th>
+      <th>Cart</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @book.each do |book| %>
+    <% @books.each do |book| %>
+      <tr>
         <td><%= book.status %></td>
         <td>
           <% if book.photo.attached? %>
@@ -38,7 +45,15 @@
         <td><%= book.published_on %></td>
         <td><%= book.price %></td>
         <td><%= link_to '詳細・購入', product_path(book) %></td>
+        <td>
+          <% if current_cart?(book, @cart) %>
+            <%= 'カートに入れました' %>
+          <% else %>
+            <%= link_to 'カートに入れる', line_items_path(book_id: book.id),
+                        data: {"turbo-method": :post}, class: 'btn btn-default' %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
-  </table>
+</table>
