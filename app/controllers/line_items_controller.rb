@@ -27,7 +27,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to products_path }
+        format.html { redirect_to orders_path }
       else
         format.html { redirect_to products_index_url, notice: 'Unprocessable entity' }
       end

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :orders, only: [:new, :create] do
     collection do
       get :confirm
+    end
+    member do
       get :complete
     end
   end

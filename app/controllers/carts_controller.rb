@@ -3,13 +3,12 @@ class CartsController < ApplicationController
 
   # GET /carts/1 or /carts/1.json
   def show
-    @cart = Cart.find(params[:id])
-    @line_items = @cart.line_items
+    @line_items = @current_cart.line_items
   end
 
   def destroy
-    @cart = Cart.find(params[:id])
-    @cart.destroy
+    @current_cart.destroy
+    session[:cart_id] = nil
 
     respond_to do |format|
       format.html { redirect_to products_path, notice: "Cart was successfully destroyed." }

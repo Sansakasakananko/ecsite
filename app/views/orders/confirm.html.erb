@@ -33,6 +33,26 @@
     <%= form.select :count, *[1..10] %>
   </div>
 
+  <% @line_items.each do |line_item| %>
+    <% book = line_item.book %>
+    <div>
+      <p><%= book.title %></p>
+      <p><%= line_item.quantity %>冊</p>
+      <p>
+        <%= line_item.total_price %>
+        <span>円 (税込)</span>
+      </p>
+    </div>
+  <% end %>
+
+  <div>
+    <p>合計 <%= @current_cart.total_number%><span>冊</span></p>
+    <p>
+      <%= current_cart.total_price %>
+      <span>円 (税込)</span>
+    </p>
+  </div>
+
   <div class="actions">
     <%= form.submit "確定" %>
   </div>

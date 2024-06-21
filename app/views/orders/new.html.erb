@@ -41,7 +41,7 @@
 
     <div>
       <%= form.label :count, style: "display: block" %>
-      <%= form.select :count, *[1..10] %>
+      <%= form.select :count, 1..10, value: LineItem.find_by(cart_id: @current_cart.id, book_id: @book.id).quantity %>
     </div>
 
     <div class=”field”>
