@@ -8,4 +8,17 @@ class OrderDetail < ApplicationRecord
       LineItem.find(item.id).delete
     end
   end
+
+  def subtotal
+    quantity * book.price 
+  end
+
+
+  def total_price
+    order_details.sum { |order| order.subtotal }
+  end
+
+  def total_number
+    order_details.sum { |order| order.quantity }
+  end
 end
