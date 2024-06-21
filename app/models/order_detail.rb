@@ -9,16 +9,8 @@ class OrderDetail < ApplicationRecord
     end
   end
 
-  def subtotal
+  def total_price
     quantity * book.price 
   end
-
-
-  def total_price
-    order_details.sum { |order| order.subtotal }
-  end
-
-  def total_number
-    order_details.sum { |order| order.quantity }
-  end
 end
+

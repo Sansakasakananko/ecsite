@@ -38,8 +38,10 @@ class OrdersController < ApplicationController
         render "confirm"
       end    
     end
+
     def complete
       @order = Order.find(params[:id])
+      CompleteMailer.complete_mail(current_user).deliver
     end
 
   private
