@@ -14,5 +14,6 @@ class Book < ApplicationRecord
   def picture
     photo.variant(resize_to_limit: [300, 300])
   end
+  
 
 end

@@ -17,7 +17,7 @@
           <% if @book.photo.attached? %>
             <%= image_tag @book.picture %>
           <% else %>
-            画像がありません
+            <%= image_tag "no_image.png", size: "300x200" %>
           <% end %>
         
 
@@ -31,3 +31,7 @@
 
 
  <%= link_to "戻る", products_path%>
+<br>
+ <footer>
+  <p>&copy; 2022 ECbook.site. All Rights Reserved.</p>
+</footer>

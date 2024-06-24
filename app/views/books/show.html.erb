@@ -45,7 +45,12 @@
   <strong>Photo:</strong>
   <% if @book.photo.attached? %>
     <%= image_tag @book.picture %>
+  <% else %>
+    <%= image_tag "no_image.png", size: "300x200" %>
   <% end %>
+
+  
+
 </p>
 
 

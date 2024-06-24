@@ -37,14 +37,14 @@
           <% if book.photo.attached? %>
             <%= image_tag book.picture %>
           <% else %>
-            画像がありません
+            <%= image_tag "no_image.png", size: "300x200" %>
           <% end %>
         </td>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.published_on %></td>
         <td><%= book.price %></td>
-        <td><%= link_to '詳細・購入', product_path(book) %></td>
+        <td><%= link_to '詳細', product_path(book) %></td>
         <td>
           <% if book.saling?%>
             <% if current_cart?(book, @cart) %>
@@ -65,3 +65,8 @@
     <% end %>
   </tbody>
 </table>
+<br>
+
+<footer>
+  <p>&copy; 2022 ECbook.site. All Rights Reserved.</p>
+</footer>
