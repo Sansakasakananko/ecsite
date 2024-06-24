@@ -29,35 +29,10 @@ header a {
   font-size: 16px;
 }
 
-header ul {
-  padding: 0;
-  list-style: none;
-}
-
-header li {
-  float: left;
-  display: inline;
-  padding: 0 20px 0 20px;
-}
-
-header #branding {
-  float: left;
-}
-
-header #branding h1 {
-  margin: 0;
-}
-
-header nav {
-  float: right;
-  margin-top: 10px;
-}
-
-header .highlight, header .current a {
-  color: #0779e4;
-  font-weight: bold;
-}
-
-header a:hover {
-  color: #cccccc;
+.admin-header {
+  background: #e695a4;
+  color: #fff;
+  padding: 10px 0;
+  text-align: left;
+  border-bottom: 4px solid #de3c3c;
 }
