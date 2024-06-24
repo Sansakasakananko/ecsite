@@ -14,4 +14,13 @@ Rails.application.routes.draw do
       get :complete
     end
   end
+
+  resources :contacts, only: [:new, :create] do
+    collection do
+        post 'confirm'
+        post 'back'
+        get 'done'
+    end
+  end
+  
 end

@@ -37,9 +37,3 @@ header a, footer a {
   border-bottom: 4px solid #de3c3c;
 }
 
-<head>
-  <!-- 他のスタイルシートなど -->
-
-  <!-- Font Awesome の CSS を読み込む -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-</head>

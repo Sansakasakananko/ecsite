@@ -71,3 +71,5 @@ end
 
 gem 'devise'
 gem 'enum_help'
+
+gem "dotenv-rails"
