@@ -29,14 +29,5 @@
   <p><strong>Price</strong>:  <%= @book.price %></p>
   <p><strong>Status</strong>: <%= @book.status %></p>
 
-  <% if @book.sold_out? %>
-    <p><strong>この商品は売切れです</strong></p>
-  <% elsif @book.backordered? %>
-    <p><strong>店頭にて予約受付中</strong></p>
-  <% elsif @book.reserve? %>
-    <p><strong>入荷待ちです</strong></p>
-  <% else %>
-    <%= link_to "購入", new_order_path(book_id: @book.id)%>
-  <% end %>
 
  <%= link_to "戻る", products_path%>

@@ -30,14 +30,16 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @line_items = @current_cart.line_items
   
-      if @order.save!
+      if @order.save
         OrderDetail.create_items(@order, @line_items)
-        @book.sold_out!
+        @line_items.each do |item|
+          item.book.sold_out!
+        end
         redirect_to complete_order_path(@order), notice: '注文が正常に登録されました。'
       else
         render "confirm"
-      end    
-    end
+      end   
+  end
 
     def complete
       @order = Order.find(params[:id])

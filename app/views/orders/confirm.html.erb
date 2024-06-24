@@ -5,15 +5,6 @@
 <%= yield %>
 
 
-<h1>注文画面</h1>
-
-  <h2>注文商品</h2>
-  <p><strong>Title</strong>:  <%= @book.title %></p>
-  <p><strong>Author</strong>: <%= @book.author %></p>
-  <p><strong>Price</strong>:  <%= @book.price %></p>
-  
-  <h2>購入フォーム</h2>
-
 <%= form_with(model: @order, url:orders_path, local: true) do |form| %>
   <%# <div> %>
     <%# <%= form.label :adress_number, style: "display: block" %> 
@@ -21,33 +12,43 @@
     <%# <%= form.text_field :adress_number %> 
   <%# </div> %>
 
+
+  <%# <div>
+    <%= form.label :count, style: "display: block" %>
+    <%# <%= @order.count  %> 
+    <%# <%= form.select :count, *[1..10] %> 
+  <%# </div> %>
+ 
+  <% @line_items.each do |line_item| %>
+    <% book = line_item.book %>
+    <div>
+      <ul>
+        <li><p><strong>Title</strong>: 『<%= book.title %>』</p>
+            <p><strong>Author</strong>: <%= @book.author %></p>
+
+            <p><strong>Quantity</strong>: <%= line_item.quantity %>冊</p>
+            <p><strong>Price</strong>:
+              <%= line_item.total_price %>
+              <span>円 (税込)</span>
+            </p>
+      </ul>
+      <br>
+    </div>
+  <% end %>
   <div>
     <%= form.label :adress, style: "display: block" %>
     <%= @order.adress %>
     <%= form.text_field :adress %>
   </div>
 
-  <div>
-    <%= form.label :count, style: "display: block" %>
-    <%= @order.count  %>
-    <%= form.select :count, *[1..10] %>
-  </div>
 
-  <% @line_items.each do |line_item| %>
-    <% book = line_item.book %>
-    <div>
-      <p><%= book.title %></p>
-      <p><%= line_item.quantity %>冊</p>
-      <p>
-        <%= line_item.total_price %>
-        <span>円 (税込)</span>
-      </p>
-    </div>
-  <% end %>
+  <br>
 
-  <div>
-    <p>合計 <%= @current_cart.total_number%><span>冊</span></p>
+  <div style="text-align: center;">
+    <h4>合計</h4>
+    <p>数量 <%= @current_cart.total_number%><span>冊</span></p>
     <p>
+      <span>料金：<span>
       <%= current_cart.total_price %>
       <span>円 (税込)</span>
     </p>

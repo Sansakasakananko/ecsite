@@ -46,11 +46,19 @@
         <td><%= book.price %></td>
         <td><%= link_to '詳細・購入', product_path(book) %></td>
         <td>
-          <% if current_cart?(book, @cart) %>
-            <%= 'カートに入れました' %>
-          <% else %>
-            <%= link_to 'カートに入れる', line_items_path(book_id: book.id),
-                        data: {"turbo-method": :post}, class: 'btn btn-default' %>
+          <% if book.saling?%>
+            <% if current_cart?(book, @cart) %>
+              <%= 'カートに入れました' %>
+            <% else %>
+              <%= link_to 'カートに入れる', line_items_path(book_id: book.id),
+                          data: {"turbo-method": :post}, class: 'btn btn-default' %>
+            <% end %>
+          <% elsif book.sold_out? %>
+            現在購入できません
+          <% elsif book.reserve?%>
+            店頭にて予約受付中
+          <% elsif book.backordered? %>
+            入荷待ち
           <% end %>
         </td>
       </tr>

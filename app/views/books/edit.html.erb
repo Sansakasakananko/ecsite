@@ -1,6 +1,74 @@
-<h1>Editing book</h1>
+<h1>編集画面</h1>
 
-<%= render "form", book: @book %>
+<%= form_with(model: @book) do |form| %>
+  <% if @book.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+        <% @book.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.file_field :photo%>
+  </div>
+<br>
+
+  <div>
+    <strong><%= form.label :title %></strong>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <strong><%= form.label :author %></strong>
+    <%= form.text_field :author %>
+  </div>
+
+  <div>
+    <strong><%= form.label :published_on %></strong>
+    <%= form.date_field :published_on %>
+  </div>
+
+  <div>
+    <strong><%= form.label :price %></strong>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <strong><%= form.label :showing %></strong>
+    <%= form.check_box :showing %>
+  </div>
+
+
+  <div class="fields">
+    <strong><%= form.label :TTag %></strong>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  </div>
+<br>
+  <div>
+    <strong>Status:</strong>
+    <%= form.radio_button :status, :saling%>
+    <%= form.label :status, "販売中" %>
+
+    <%= form.radio_button :status, :sold_out%>
+    <%= form.label :status, "売切れ" %>
+
+    <%= form.radio_button :status, :reserve%>
+    <%= form.label :status, "予約" %>
+
+    <%= form.radio_button :status, :backordered%>
+    <%= form.label :status, "入荷待ち" %>
+  </div>
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <br>
 

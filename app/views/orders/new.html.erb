@@ -9,9 +9,22 @@
 <h1>注文画面</h1>
 
   <h2>注文商品</h2>
-  <p><strong>Title</strong>:  <%= @book.title %></p>
-  <p><strong>Author</strong>: <%= @book.author %></p>
-  <p><strong>Price</strong>:  <%= @book.price %></p>
+<% @line_items.each do |line_item| %>
+  <% book = line_item.book %>
+  <div>
+    <ul>
+      <li><p><strong>Title</strong>: 『<%= book.title %>』</p>
+          <p><strong>Author</strong>: <%= @book.author %></p>
+
+          <p><strong>Quantity</strong>: <%= line_item.quantity %>冊</p>
+          <p><strong>Price</strong>:
+            <%= line_item.total_price %>
+            <span>円 (税込)</span>
+          </p>
+    </ul>
+  </div>
+<% end %>
+
   
   <h2>購入フォーム</h2>
 
@@ -39,10 +52,10 @@
       <%= form.text_field :adress %>
     </div>
 
-    <div>
+    <%# <div>
       <%= form.label :count, style: "display: block" %>
-      <%= form.select :count, 1..10, value: LineItem.find_by(cart_id: @current_cart.id, book_id: @book.id).quantity %>
-    </div>
+      <%# <%= form.select :count, 1..10, value: LineItem.find_by(cart_id: @current_cart.id, book_id: @book.id).quantity %>
+    <%# </div> %> 
 
     <div class=”field”>
       <%= form.hidden_field :book_id, value: @book.id %>

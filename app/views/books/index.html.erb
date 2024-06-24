@@ -1,21 +1,43 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Books</h1>
+<h1>管理者画面</h1>
 
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <% if book.photo.attached? %>
-        <%= image_tag book.picture %>
-      <% else %>
-        画像がありません
-      <% end %>
-    </p>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
-  <% end %>
-</div>
+
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Picture</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Published on</th>
+      <th>Price</th>
+      <th>Show</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.status %></td>
+        <td>
+          <% if book.photo.attached? %>
+            <%= image_tag book.picture %>
+          <% else %>
+            画像がありません
+          <% end %>
+        </td>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.published_on %></td>
+        <td><%= book.price %></td>
+        <td><%= link_to "詳細", book %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to "New book", new_book_path %>
+
