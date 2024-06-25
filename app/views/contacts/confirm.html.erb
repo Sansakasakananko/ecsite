@@ -1,51 +1,59 @@
-<div class="container p-5">
+<header>
+    <%= render 'shared/user_signed_in' %>
+</header>
+<br>
+<br>
+
+
+<div class="container-fluid light-blue-container p-5">
   <div class="row">
-    <div class="col-md-10 offset-md-1">
-
-      <table class="table">
-        <tbody>
-          <tr>
-            <td class="text-right" style="width: 30%;">お名前</td>
-            <td><%= @contact.name %></td>
-          </tr>
-          <tr>
-            <td class="text-right mt-3" style="width: 30%;">メールアドレス</td>
-            <td><%= @contact.email %></td>
-          </tr>
-          <tr>
-            <td class="text-right mt-3" style="width: 30%;">件名</td>
-            <td><%= @contact.subject %></td>
-          </tr>
-          <tr>
-            <td class="text-right mt-3">メッセージ</td>
-            <td style="white-space: pre-wrap;"><%= @contact.message %></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="d-flex">
-        <div class="mr-3">
-        <%= form_with model: @contact do |f| %>
-          <%= f.hidden_field :name %>
-          <%= f.hidden_field :email %>
-          <%= f.hidden_field :subject %>
-          <%= f.hidden_field :message %>
-          <div><%= f.submit '送信', class: "btn btn-success" %></div>
-        <% end %>
-        </div>
-
-        <div>
-        <%= form_with model: @contact, url: back_contacts_path do |f| %>
-          <%= f.hidden_field :name %>
-          <%= f.hidden_field :email %>
-          <%= f.hidden_field :subject %>
-          <%= f.hidden_field :message %>
-          <div><%= f.submit '入力画面に戻る', class: "btn btn-info" %></div>
-        <% end %>
-        </div>
+    <div class="col-md-8 offset-md-2">
+    <ul>
+      <h2>確認画面</h2>
+      <p>以下の内容で送信します。よろしいですか？</p>
+      <div class="form-group">
+        <label><strong>お名前</strong></label>
+        <p><%= @contact.name %></p>
+      </div>
+      <div class="form-group">
+        <label><strong>メールアドレス</strong></label>
+        <p><%= @contact.email %></p>
+      </div>
+      <div class="form-group">
+        <label><strong>電話番号</strong></label>
+        <p><%= @contact.phone_number %></p>
       </div>
 
+      <div class="form-group">
+        <label><strong>件名</strong></label>
+        <p><%= @contact.subject %></p>
+      </div>
+      <div class="form-group">
+        <label><strong>メッセージ</strong></label>
+        <p><%= @contact.message %></p>
+      </div>
+    </ul>
+      <%= form_with model: @contact, url: contacts_path, method: :post, data: { turbo: true } do |f| %>
+        <div>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :email %>
+          <%= f.hidden_field :phone_number%>
+          <%= f.hidden_field :subject %>
+          <%= f.hidden_field :message %>
+          <%= f.submit '送信', class: "btn btn-outline-info bg-white" %>
+        </div>
+      <% end %>
 
+      <%= form_with model: @contact, url: back_contacts_path, method: :post, data: { turbo: false } do |f| %>
+        <div>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :email %>
+          <%= f.hidden_field :phone_number%>
+          <%= f.hidden_field :subject %>
+          <%= f.hidden_field :message %>
+          <%= f.submit '戻る', class: "btn btn-outline-secondary bg-white" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

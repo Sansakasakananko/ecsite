@@ -1,5 +1,8 @@
-<h1>編集画面</h1>
-
+<div class="admin-header">
+  <h1>編集画面</h1>
+</div>
+<br>
+<br>
 <%= form_with(model: @book) do |form| %>
   <% if @book.errors.any? %>
     <div style="color: red">

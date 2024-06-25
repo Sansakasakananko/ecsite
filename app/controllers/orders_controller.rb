@@ -16,10 +16,18 @@ class OrdersController < ApplicationController
   end
 
   def confirm
+
     @book = Book.find(params[:order][:book_id])
+    @order = Order.new(order_params)
+
+
+
     if @book.saling?
       @order = Order.new(order_params)
       @line_items = @current_cart.line_items
+      if @order.invalid?
+        return  render :new
+      end
     else
       redirect_to products_path
     end
@@ -29,7 +37,7 @@ class OrdersController < ApplicationController
     @book = Book.find(order_params[:book_id])
     @order = Order.new(order_params)
     @line_items = @current_cart.line_items
-  
+
       if @order.save
         OrderDetail.create_items(@order, @line_items)
         @line_items.each do |item|
@@ -38,7 +46,7 @@ class OrdersController < ApplicationController
         redirect_to complete_order_path(@order), notice: '注文が正常に登録されました。'
       else
         render "confirm"
-      end   
+      end
   end
 
     def complete

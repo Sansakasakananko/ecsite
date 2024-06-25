@@ -3,8 +3,11 @@
 
     <div style="text-align: right;">
     <% if session[:cart_id]%>
-    <%= link_to 'カートを見る',cart_path(session[:cart_id]) %>
-    <% end %>
+    <%= link_to 'カートを見る',cart_path(session[:cart_id]) %>&nbsp;&nbsp;&nbsp;&nbsp;
+     <% end %>
+    <%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete}%>&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to 'お問い合わせ', new_contact_path %>
+   
   </div>
 
 </header>

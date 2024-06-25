@@ -1,8 +1,8 @@
 <header>
   <%= render 'shared/user_signed_in' %>
 </header>
-
 <%= yield %>
+
 
 
 <%= form_with(model: @order, url:orders_path, local: true) do |form| %>

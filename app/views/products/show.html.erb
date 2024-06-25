@@ -1,37 +1,70 @@
 <header>
-    <%= render 'shared/user_signed_in' %>
-
-    <div style="text-align: right;">
-    <% if session[:cart_id]%>
-    <%= link_to 'カートを見る',cart_path(session[:cart_id]) %>
+  <%= render 'shared/user_signed_in' %>
+  <div style="text-align: right;">
+    <% if session[:cart_id] %>
+      <%= link_to 'カートを見る', cart_path(session[:cart_id]) %>
     <% end %>
   </div>
-
 </header>
-<%= yield %>
 
+<div class="container">
+  <h1>詳細画面</h1>
 
+  <div class="row">
+    <div class="col-md-3">
+      <p><strong>Picture</strong></p>
+      <% if @book.photo.attached? %>
+        <%= image_tag @book.picture %>
+      <% else %>
+        <%= image_tag "no_image.png", size: "300x200" %>
+      <% end %>
+    </div>
 
-<h1>詳細画面</h1>
-  <p><strong>Picture</strong></p> 
-          <% if @book.photo.attached? %>
-            <%= image_tag @book.picture %>
-          <% else %>
-            <%= image_tag "no_image.png", size: "300x200" %>
-          <% end %>
-        
-
-
-  <p><strong>Tag</strong>:  <%= @book.tags.map(&:name).join(',') %></p>
-  <p><strong>Title</strong>:  <%= @book.title %></p>
-  <p><strong>Author</strong>: <%= @book.author %></p>
-  <p><strong>Published on</strong>: <%= @book.published_on %></p>
-  <p><strong>Price</strong>:  <%= @book.price %></p>
-  <p><strong>Status</strong>: <%= @book.status %></p>
-
-
- <%= link_to "戻る", products_path%>
+    <div class="col-md-9">
+      <table class="table">
+        <tr>
+          <td><strong>Tag</strong></td>
+          <td><%= @book.tags.map(&:name).join(',') %></td>
+        </tr>
+        <tr>
+          <td><strong>Title</strong></td>
+          <td><%= @book.title %></td>
+        </tr>
+        <tr>
+          <td><strong>Author</strong></td>
+          <td><%= @book.author %></td>
+        </tr>
+        <tr>
+          <td><strong>Published on</strong></td>
+          <td><%= @book.published_on %></td>
+        </tr>
+        <tr>
+          <td><strong>Price</strong></td>
+          <td><%= @book.price %></td>
+        </tr>
+        <tr>
+          <td><strong>Status</strong></td>
+          <td><%= @book.status %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% if @book.saling?%>
+    <% if current_cart?(@book, @cart) %>
+      <%= 'カートに入れました' %>
+    <% else %>
+      <%= link_to 'カートに入れる', line_items_path(book_id: book.id),
+         data: {"turbo-method": :post}, class: 'btn btn-default' %>
+    <% end %>
+  <% elsif @book.sold_out? %>
+    現在購入できません
+  <% elsif @book.reserve?%>
+    店頭にて予約受付中
+  <% elsif @book.backordered? %>
+    入荷待ち
+  <% end %>
+ 
 <br>
- <footer>
-  <p>&copy; 2022 ECbook.site. All Rights Reserved.</p>
-</footer>
+           
+ <%= link_to '一覧画面', products_path %>
+</div>

@@ -1,62 +1,56 @@
-<p style="color: green"><%= notice %></p>
-
-<h2>詳細画面</h2>
-  <p>
-    <strong>Tags:</strong>
-    <%= @book.tags.map(&:name).join(", ") %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= @book.title %>
-  </p>
-
-  <p>
-    <strong>Author:</strong>
-    <%= @book.author %>
-  </p>
-
-  <p>
-    <strong>Published on:</strong>
-    <%= @book.published_on %>
-  </p>
-
-  <p>
-    <strong>Showing:</strong>
-    <%= @book.showing %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= @book.price %>
-  </p>
-
-  <p>
-    <strong>Status:<strong>
-      <%= @book.status %>
-  </p>
-
-
-
+<div class="admin-header">
+  <h1>詳細画面</h1>
 </div>
 
+<p style="color: green"><%= notice %></p>
 
-<p>
-  <strong>Photo:</strong>
-  <% if @book.photo.attached? %>
-    <%= image_tag @book.picture %>
-  <% else %>
-    <%= image_tag "no_image.png", size: "300x200" %>
-  <% end %>
+  <div class="row">
+  <ul>
+    <div class="col-md-3">
+      <p><strong>Picture</strong></p>
+      <% if @book.photo.attached? %>
+        <%= image_tag @book.picture %>
+      <% else %>
+        <%= image_tag "no_image.png", size: "300x200" %>
+      <% end %>
+    </div>
 
-  
+    <div class="col-md-9">
+      <table class="table">
+        <tr>
+          <td><strong>Tag</strong></td>
+          <td><%= @book.tags.map(&:name).join(',') %></td>
+        </tr>
+        <tr>
+          <td><strong>Title</strong></td>
+          <td><%= @book.title %></td>
+        </tr>
+        <tr>
+          <td><strong>Author</strong></td>
+          <td><%= @book.author %></td>
+        </tr>
+        <tr>
+          <td><strong>Published on</strong></td>
+          <td><%= @book.published_on %></td>
+        </tr>
+        <tr>
+          <td><strong>Price</strong></td>
+          <td><%= @book.price %></td>
+        </tr>
+        <tr>
+          <td><strong>Status</strong></td>
+          <td><%= @book.status %></td>
+        </tr>
+      </table>
+    </div>
+  </ul>
 
-</p>
+
 
 
 <div>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %>
+  <%= link_to "編集", edit_book_path(@book) %> |
+  <%= link_to "一覧に戻る", books_path %>
 
   <%= button_to "Destroy this book", @book, method: :delete %>
 </div>

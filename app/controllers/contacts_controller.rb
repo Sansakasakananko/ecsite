@@ -6,9 +6,13 @@ class ContactsController < ApplicationController
 
   def confirm
     @contact = Contact.new(contact_params)
-    render :new if @contact.invalid?
+    if @contact.valid?
+      render :confirm
+    else
+      render :new
+    end
   end
-  
+
   def back
     @contact = Contact.new(contact_params)
     render :new
@@ -16,23 +20,28 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    if @contact.save!
-      
-      ContactMailer.send_mail(@contact).deliver_now
-      redirect_to done_contacts_path
+
+    if @contact.save
+      ContactMailer.send_mail(@contact).deliver
+      respond_to do |format|
+        format.html { redirect_to done_contacts_path }
+      end
     else
       flash[:alert] = @contact.errors.full_messages.join(", ")
-      @contact = Contact.new
-      render :new
+      respond_to do |format|
+        format.turbo_stream { render :new }
+        format.html { render :new }
+      end
     end
   end
+
 
   def done
   end
 
-    private
+  private
 
-    def contact_params
-      params.require(:contact).permit(:name, :email, :subject, :message)
-    end
+  def contact_params
+    params.require(:contact).permit(:name, :email, :subject, :message, :phone_number)
+  end
 end

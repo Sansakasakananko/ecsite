@@ -1,12 +1,17 @@
+<div class="admin-header">
+<h1>Tags</h1>
+</div>
+<br>
+<br>
+
 <p style="color: green"><%= notice %></p>
 
-<h1>Tags</h1>
  
 <div id="tags">
   <% @tags.each do |tag| %>
     <%= render tag %>
       <p>
-        <%= link_to "編集", edit_tag_path(tag) %>
+        <%= link_to "編集", edit_tag_path(tag) %> |
         <%= link_to "削除", tag, data: {turbo_method: :delete} %>
       </p>
   <% end %>
