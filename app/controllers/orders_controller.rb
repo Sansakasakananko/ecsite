@@ -17,8 +17,8 @@ class OrdersController < ApplicationController
 
   def confirm
 
+
     @book = Book.find(params[:order][:book_id])
-    @order = Order.new(order_params)
 
 
 
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
       @order = Order.new(order_params)
       @line_items = @current_cart.line_items
       if @order.invalid?
-        return  render :new
+        return render :new, status: :unprocessable_entity
       end
     else
       redirect_to products_path
