@@ -4,6 +4,7 @@
 <br>
 <br>
 
+<div class="contact-form">
 
 <div class="container-fluid light-blue-container p-5">
   <div class="row">
@@ -11,6 +12,7 @@
     <ul>
       <h2>確認画面</h2>
       <p>以下の内容で送信します。よろしいですか？</p>
+      <br>
       <div class="form-group">
         <label><strong>お名前</strong></label>
         <p><%= @contact.name %></p>
@@ -43,7 +45,7 @@
           <%= f.submit '送信', class: "btn btn-outline-info bg-white" %>
         </div>
       <% end %>
-
+<br>
       <%= form_with model: @contact, url: back_contacts_path, method: :post, data: { turbo: false } do |f| %>
         <div>
           <%= f.hidden_field :name %>
@@ -56,4 +58,5 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
