@@ -7,5 +7,6 @@
 <p>ここはマイページです</p>
 
 <p>あなたのメールアドレスは<%= current_user.email %>です</p>
+<br>
 <p><%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete}%></p>
 <p><%= link_to '商品一覧', products_path%></p>

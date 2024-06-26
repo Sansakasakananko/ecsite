@@ -1,42 +1,38 @@
 <header>
     <%= render 'shared/user_signed_in' %>
-
     <div style="text-align: right;">
     <% if session[:cart_id]%>
     <%= link_to 'カートを見る',cart_path(session[:cart_id]) %>&nbsp;&nbsp;&nbsp;&nbsp;
      <% end %>
     <%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete}%>&nbsp;&nbsp;&nbsp;&nbsp;
-    <%= link_to 'お問い合わせ', new_contact_path %>
+    <%= link_to 'お問い合わせ', new_contact_path %>&nbsp;&nbsp;
    
   </div>
-
 </header>
 
-<p id="notice"><%= notice %></p>
+<br><br>
 
-<%= yield %>
+<div class="container">
+  <h1 class="text-center">商品一覧画面</h1>
 
-<h1>商品一覧画面</h1>
-<h2>Search</h2>
-  <%= form_with url: '/products', local: true, method: :get do |f| %>
-  <table>
-<tr>
-  <th>Title</th>
-  <td><%= f.text_field :title, value: params[:title] %></td>
-</tr>    <tr>
-<tr>
-  <th>Author</th>
-  <td><%= f.text_field :author, value: params[:author] %></td>
-</tr>
-  </table>
-  <%= f.submit 'Search' %>
-  <% end %>
-<br>
+  <div class="search-form">
+    <h2>Search</h2>
+    <%= form_with url: '/products', local: true, method: :get, class: "form-inline" do |f| %>
+      <div class="form-group">
+        <%= f.label :title, 'Title' %>
+        <%= f.text_field :title, value: params[:title], class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :author, 'Author' %>
+        <%= f.text_field :author, value: params[:author], class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Search', class: 'btn btn-search' %>
+      </div>
+    <% end %>
+  </div>
 
-<% if @books.empty? %>
-  <p>申し訳ございません。商品が見つかりませんでした。</p>
-<% else %>
-  <table border="1">
+  <table class="styled-table">
     <thead>
       <tr>
         <th>Status</th>
@@ -49,7 +45,6 @@
         <th>Cart</th>
       </tr>
     </thead>
-
     <tbody>
       <% @books.each do |book| %>
         <tr>
@@ -58,38 +53,35 @@
             <% if book.photo.attached? %>
               <%= image_tag book.picture %>
             <% else %>
-              <%= image_tag "no_image.png", size: "300x200" %>
+              <%= image_tag "no_image.png", size: "100x100", class: 'img-thumbnail' %>
             <% end %>
           </td>
           <td><%= book.title %></td>
           <td><%= book.author %></td>
           <td><%= book.published_on %></td>
           <td><%= book.price %></td>
-          <td><%= link_to '詳細', product_path(book) %></td>
+          <td><%= link_to '詳細', product_path(book), class: 'btn btn-info' %></td>
           <td>
-            <% if book.saling?%>
+            <% if book.saling? %>
               <% if current_cart?(book, @cart) %>
-                <%= 'カートに入れました' %>
+                <span class="badge success">カートに入れました</span>
               <% else %>
-                <%= link_to 'カートに入れる', line_items_path(book_id: book.id),
-                            data: {"turbo-method": :post}, class: 'btn btn-default' %>
+                <%= link_to 'カートに入れる', line_items_path(book_id: book.id), data: {"turbo-method": :post}, class: 'btn btn-primary' %>
               <% end %>
             <% elsif book.sold_out? %>
-              現在購入できません
-            <% elsif book.reserve?%>
-              店頭にて予約受付中
+              <span class="badge danger">現在購入できません</span>
+            <% elsif book.reserve? %>
+              <span class="badge warning">店頭にて予約受付中</span>
             <% elsif book.backordered? %>
-              入荷待ち
+              <span class="badge info">入荷待ち</span>
             <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-<% end %>
-  
-<br>
+</div>
 
-<footer>
+<footer class="text-center">
   <p>&copy; 2022 ECbook.site. All Rights Reserved.</p>
 </footer>
