@@ -14,6 +14,9 @@ class ProductsController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+
+    @cart = current_cart
+
   end
 
   private

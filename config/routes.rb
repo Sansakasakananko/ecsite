@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     passwords: "admins/passwords",
     confirmations: "admins/confirmations"
   }
+  namespace :admins do
+    resources :books
+  end
   resources :books
 
   devise_for :users, controllers: {

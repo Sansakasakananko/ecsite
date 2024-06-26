@@ -53,7 +53,7 @@
     <% if current_cart?(@book, @cart) %>
       <%= 'カートに入れました' %>
     <% else %>
-      <%= link_to 'カートに入れる', line_items_path(book_id: book.id),
+      <%= link_to 'カートに入れる', line_items_path(book_id: @book.id),
          data: {"turbo-method": :post}, class: 'btn btn-default' %>
     <% end %>
   <% elsif @book.sold_out? %>

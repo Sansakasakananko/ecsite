@@ -5,11 +5,19 @@ class ApplicationController < ActionController::Base
   before_action :current_cart
 
   def after_sign_in_path_for(resource)
-    products_path
+    if resource.is_a?(Admin)
+      books_path(admin: true)
+    else
+      products_path
+    end
   end
 
   def after_sign_out_path_for(resource)
-    new_user_session_path
+    if resource == :admin
+      new_admin_session_path(admin: true)
+    else resouce == :user
+      new_user_session_path
+    end
   end
 
   private
