@@ -1,11 +1,22 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: {
+    sessions: "admins/sessions",
+    passwords: "admins/passwords",
+    confirmations: "admins/confirmations"
+  }
+  resources :books
+
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    passwords: "users/passwords",
+    confirmations: "users/confirmations"
+  }
+
   resources :line_items ,only: :create
   resources :carts, only: [:show, :destroy]
-  devise_for :users
-  devise_for :admins
   get :mypage, to: 'mypage#index'
   resources :tags, except: :show
-  resources :books
   resources :products, only: [:index, :show]
   resources :orders, only: [:new, :create] do
     collection do
@@ -15,7 +26,6 @@ Rails.application.routes.draw do
       get :complete
     end
   end
-
   resources :contacts, only: [:new, :create] do
     collection do
         post 'confirm'
@@ -23,5 +33,8 @@ Rails.application.routes.draw do
         get 'done'
     end
   end
+
+
+
 
 end

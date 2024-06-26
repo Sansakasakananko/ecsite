@@ -29,7 +29,8 @@
           <% if book.photo.attached? %>
             <%= image_tag book.picture %>
           <% else %>
-            <%= image_tag "no_image.png", size: "300x200" %>
+            <%# <%= image_tag "no_image.png", size: "300x200" %> 
+            画像がありません
           <% end %>
         </td>
         <td><%= book.title %></td>
