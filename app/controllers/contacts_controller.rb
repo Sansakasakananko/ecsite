@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
   def confirm
     @contact = Contact.new(contact_params)
     if @contact.valid?
-      render :confirm
+      return render :confirm, status: :unprocessable_entity
     else
       render :new
     end
@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
         format.html { redirect_to done_contacts_path }
       end
     else
-      flash[:alert] = @contact.errors.full_messages.join(", ")
+      flash[:alert] = '入力内容にエラーがあります。もう一度確認してください。'
       respond_to do |format|
         format.turbo_stream { render :new }
         format.html { render :new }
